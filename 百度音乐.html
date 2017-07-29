@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>百度音乐</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #wrap{
+            margin: 50px auto;
+            height: 300px;
+            width: 300px;
+        }
+        ul{
+            list-style: none;
+        }
+        #top{
+            position: relative;
+        }
+        #topRight{
+            position: absolute;
+            top:0;
+            right: 0;
+            line-height: 30px;
+        }
+        #topRight li{
+            height: 30px;
+            margin-top: 2px;
+        }
+        #topLeft{
+            line-height: 30px;
+        }
+        #topLeft li{
+            height: 30px;
+            margin-top: 2px;
+        }
+        #bottom{
+            margin-top: 10px;
+            height: 30px;
+            line-height: 30px;
+            border-top: 1px solid gainsboro;
+        }
+        .active{
+            background: #d6d6d6;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <div id="top">
+            <ul id="topLeft">
+                <li>
+                    <input type="checkbox"> 私奔
+                </li>
+                <li>
+                    <input type="checkbox"> 北京北京
+                </li>
+                <li>
+                    <input type="checkbox"> 我爱你中国
+                </li>
+                <li>
+                    <input type="checkbox"> 花火
+                </li>
+                <li>
+                    <input type="checkbox"> 回来
+                </li>
+                <li>
+                    <input type="checkbox"> 爱要有你才完美
+                </li>
+            </ul>
+            <ul id="topRight">
+                <li>梁博</li>
+                <li>梁博、黄勇</li>
+                <li>梁博</li>
+                <li>梁博</li>
+                <li>梁博</li>
+                <li>梁博、那英</li>
+            </ul>
+        </div>
+        <ul id="bottom">
+            <li>
+                <input type="checkbox">多选
+            </li>
+        </ul>
+    </div>
+
+</body>
+<script>
+    var oul = document.getElementById('topLeft');
+    var topLeft_li = oul.getElementsByTagName('li');
+    var oinput = oul.getElementsByTagName('input');
+    var obottom = document.getElementById('bottom');
+    var bottom_input = obottom.getElementsByTagName('input');
+    var arr = ['#ebfcff','white'];
+    var oparli = '';
+    for(var i=0;i<topLeft_li.length;i++){
+        topLeft_li[i].index = i;
+        topLeft_li[i].style.background = arr[i%arr.length];
+        topLeft_li[i].onmouseover = function () {
+            this.style.background = '#d6d6d6';
+        };
+        topLeft_li[i].onmouseout = function () {
+            if(!oinput[this.index].checked){
+                this.style.background = arr[this.index%arr.length];
+            }
+        };
+    };
+    for(var j=0;j<oinput.length;j++){
+        oinput[j].onclick = function(){
+            oparli = this.parentNode;
+            if(this.checked){
+                oparli.style.background = '#d6d6d6';
+            }else{
+                bottom_input[0].checked = false;
+            };
+        };
+    };
+    bottom_input[0].onclick = function () {
+        for(var i=0;i<topLeft_li.length;i++){
+            if(this.checked){
+                topLeft_li[i].style.background = '#d6d6d6';
+                oinput[i].checked = true;
+            }else{
+                topLeft_li[i].style.background = arr[i%arr.length];
+                oinput[i].checked = false;
+            };
+        };
+    };
+
+
+
+</script>
+</html>
